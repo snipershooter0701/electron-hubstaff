@@ -11,19 +11,29 @@ linux:  electron-packager ./ electron-hubstaff --overwrite --asar=true --platfor
 #upload AWS S3 bucket-1
 
 const AWS = require('aws-sdk');
+
 const robot = require("robotjs");
 
 const s3 = new AWS.S3({
+
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    
 });
 
 const uploadToS3 = (file, employeeId) => {
+
     const s3Params = {
+    
         Bucket: 'my-employee-screenshots',
+        
         Key: `${employeeId}/${Date.now()}.png`,
+        
         Body: file,
+        
         ContentType: 'image/png'
+        
     };
 
     s3.upload(s3Params, (err, data) => {
@@ -35,32 +45,58 @@ const uploadToS3 = (file, employeeId) => {
     });
 };
 
+
 #display screen capture and upload AWS S3 bucket-2
 
 const s3 = new AWS.S3();
+
 const capture = require('node-screen-capture');
+
 const sharp = require('sharp');
 
 capture.listDisplays().then(displays => {
+
     displays.forEach(display => {
+    
         capture.captureScreen({display: display.id}).then(img => {
+        
             sharp(img).resize({ width: 100, height: 100 }).toBuffer((err, buffer) => {
+            
                 if (err) {
+                
                     console.error(err);
+                    
                 }
+                
                 const params = {
+                
                     Bucket: 'my-bucket',
+                    
                     Key: 'screenshot.png',
+                    
                     Body: buffer
+                    
                 };
+                
                 s3.upload(params, function(err, data) {
+                
                     if (err) {
+                    
                         console.error(err);
+                        
                     }
+                    
                     console.log(`Screenshot successfully uploaded to ${data.Location}`);
+                    
                 });
+                
             });
+            
         });
+        
     });
+    
 });
+
+
 
