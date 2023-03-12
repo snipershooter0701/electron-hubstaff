@@ -1,0 +1,47 @@
+{
+  "name": "electron-staff",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "build-win": "electron-packager ./ electron-hubstaff --platform=win32 --arch=x64",
+    "build-mac": "electron-packager ./ electron-hubstaff --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds",
+    "build-linux": "electron-packager ./ electron-hubstaff --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^11.5.0",
+    "electron-package": "^0.1.0",
+    "electron-packager": "^17.1.1"
+  },
+  "dependencies": {
+    "active-win": "^8.0.3",
+    "aws-sdk": "^2.1311.0",
+    "bcryptjs": "^2.4.3",
+    "blueimp-md5": "^2.19.0",
+    "electron-rebuild": "^3.2.9",
+    "iohook": "^0.9.3",
+    "node-browser-history": "^2.4.12",
+    "nodemon": "^2.0.20",
+    "screenshot-desktop": "^0.0.0-development",
+    "timer-node": "^5.0.7",
+    "yarn": "^1.22.19"
+  },
+  "iohook": {
+    "targets": [
+      "node-72",
+      "electron-85"
+    ],
+    "platforms": [
+      "win32",
+      "darwin",
+      "linux"
+    ],
+    "arches": [
+      "x64",
+      "ia32"
+    ]
+  },
+  "description": ""
+}
